@@ -8,7 +8,7 @@ const CharacterCard = ({
 }) => {
   const {
     name, gender, species, birth_year, eye_color, skin_color,
-    hair_color, mass, height, homeworld, films, species_id, homeworld_id
+    hair_color, mass, height, homeworld, films = [], species_id, homeworld_id
   } = info;
 
   let filmData = films.map((film, i) => (
