@@ -79,7 +79,7 @@ const CreateCharacter = props => {
         skin_color,
         hair_color,
         mass,
-        height,
+        height: parseInt(height),
         homeworld,
         homeworld_id,
         films
@@ -167,7 +167,7 @@ const CreateCharacter = props => {
         </div>
         <div className="createCharFields">
           <label htmlFor="skinColor">Skin Color: </label>
-          <input name="skinColor" placeholder="blue" value={skin_color} onChange={skinColorOnChange} />
+          <input name="skinColor" placeholder="fair" value={skin_color} onChange={skinColorOnChange} />
         </div>
         <div className="createCharFields">
           <label htmlFor="hairColor">Hair Color: </label>
@@ -175,11 +175,11 @@ const CreateCharacter = props => {
         </div>
         <div className="createCharFields">
           <label htmlFor="mass">Mass: </label>
-          <input name="mass" placeholder="Male" value={mass} onChange={massOnChange} />
+          <input name="mass" placeholder="77" value={mass} onChange={massOnChange} />
         </div>
         <div className="createCharFields">
           <label htmlFor="height">Height: </label>
-          <input name="height" placeholder="Male" value={height} onChange={heightOnChange} />
+          <input name="height" placeholder="172" value={height} onChange={heightOnChange} />
           {heightError ? (<span className="errorMsg">{heightError}</span>) : null}
         </div>
         <div className="createCharFields">
