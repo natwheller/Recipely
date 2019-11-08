@@ -17,8 +17,8 @@ module.exports = {
   mode: 'development',
   devServer: {
     // Required for Docker to work with dev server
-    host: '0.0.0.0',
-    // host: localhost,
+    // host: '0.0.0.0',
+    host: 'localhost',
     port: 8080,
     // match the output path
     contentBase: path.resolve(__dirname, 'dist'),
