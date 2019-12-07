@@ -16,9 +16,7 @@ module.exports = {
   devtool: 'eval-source-map',
   mode: 'development',
   devServer: {
-    // Required for Docker to work with dev server
-    host: '0.0.0.0',
-    // host: localhost,
+    host: 'localhost',
     port: 8080,
     // match the output path
     contentBase: path.resolve(__dirname, 'dist'),
@@ -62,20 +60,7 @@ module.exports = {
         test: /.(css|scss)$/,
         exclude: /node_modules/,
         use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg|ico)$/,
-        use: [
-          {
-            // loads files as base64 encoded data url if image file is less than set limit
-            loader: 'url-loader',
-            options: {
-              // if file is greater than the limit (bytes), file-loader is used as fallback
-              limit: 8192,
-            },
-          },
-        ],
-      },
+      }
     ],
   },
   plugins: [
