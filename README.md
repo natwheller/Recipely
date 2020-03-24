@@ -48,7 +48,7 @@ You do not need to modify any frontend code, only the backend, but feel free to 
 1. [ ] Now we are ready to send queries using `pool.query()` to the database. At the bottom of this file, we are exporting an object with a property called query, which is a function that will return the invocation of `pool.query()`. In betweent this, we can add `console.log` for all the queries being made for tracking purposes.
    * NOTE: While we could export the pool from here and just use `pool.query()` directly from the controller, exporting this way let's us controller all the database queries from one file location and any logic or logging that needs to change lives in this one file.
 1. [ ] Here is the ER diagram of the database again to reference for the upcoming sections:
-![pg_schema](/docs/images/schema.png)
+![pg_schema](/docs/assets/images/schema.png)
 
 #### Get and serve characters
 1. [ ] On load, the frontend will be making a GET request to `/api/` to get an array of characters. Check out the route handlers in the `server/routes/api.js` file. Notice it is using `starWarsController.getCharacters` as a middleware, and afterwards sending a JSON response with an empty array.
@@ -110,7 +110,7 @@ You do not need to modify any frontend code, only the backend, but feel free to 
 1. [ ] Sign up for a MongoDB Atlas account [here](https://www.mongodb.com/cloud/atlas).
    * Choose a provider and region where the free tier is available and select that free tier. Be sure to opt out of any featuers like backups that will cost extra.
    * Go to your Cluster view and click on **CONNECT**.
-    ![mongodb_atlas_connect](/docs/images/mongodb_atlas_connect.png)
+    ![mongodb_atlas_connect](/docs/assets/images/mongodb_atlas_connect.png)
    * Setup connection security by whitelisting your connection IP address and creating a MongoDB User. Remember this username and password for the next step.
    * For the connection method, select "Connect Your Application" and copy the connection string.
    * Open a terminal in this project directory and run the command below. Make sure you have replaced `<password>` in your connection string with your MongoDB user password created earlier and wrap the entire string with double quotes. This command will create a database called **starwars** in your cloud database with data from the `dump/` folder.
