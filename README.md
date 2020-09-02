@@ -40,6 +40,7 @@ You do not need to modify any frontend code, only the backend, but feel free to 
 1. [ ] You should already have an ElephantSQL database in the cloud with the Star Wars database loaded from the [Unit 10 Skill Builder](https://github.com/CodesmithLLC/unit-10SB-databases). We will be using the same database so be sure to have the connection URL handy.
 1. [ ] Install your npm dependencies by running `npm install` in your terminal.
 1. [ ] Run `npm run dev` to start your server and bundle the frontend. It will launch the frontend application in a browser window which will currently have no characters.
+   * NOTE:  If you are having trouble loading the page, run `node -v` to get the version of node installed on your computer and ensure you have the [latest stable (LTS) version](https://nodejs.org/en/) and not an unstable version. If you have an unstable version, run `sudo n stable` to downgrade to the latest stable version or `sudo n versionnumber` to download a specific version of node. 
 
 #### Set up your database connection
 1. [ ] Take a look into `server/models/starWarsModels.js`. Add your connection URL to the ElephantSQL database into `PG_URI`.
