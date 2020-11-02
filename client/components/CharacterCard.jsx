@@ -1,4 +1,3 @@
-/* eslint-disable camelcase, react/no-array-index-key, global-require, import/no-dynamic-require */
 import React from 'react';
 import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
@@ -11,7 +10,7 @@ const CharacterCard = ({
     hair_color, mass, height, homeworld, films = [], species_id, homeworld_id
   } = info;
 
-  let filmData = films.map((film, i) => (
+  const filmData = films.map((film, i) => (
     <li key={i} className="charFilm">
       - {film.title} <span className="icon"><FAIcon icon={faQuestionCircle} size="xs" style={{color: 'steelBlue'}} onClick={e => openDetailsModal(e, 'film', film.id)} /></span>
     </li>
@@ -21,7 +20,7 @@ const CharacterCard = ({
     const top = e.pageY;
     const left = e.pageX;
     openModal(type, { top, left }, id);
-  }
+  };
 
   return (
     <article className="card charCard">

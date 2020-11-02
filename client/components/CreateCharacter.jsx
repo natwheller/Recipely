@@ -12,10 +12,10 @@ const useInput = init => {
   const [ value, setValue ] = useState(init);
   const onChange = e => {
     setValue(e.target.value);
-  }
+  };
   // return the value with the onChange function instead of setValue function
   return [ value, onChange ];
-}
+};
 
 const CreateCharacter = props => {
   const [ name, nameOnChange ] = useInput('');
@@ -38,13 +38,13 @@ const CreateCharacter = props => {
     const idx = e.target.value;
     setSpecies(speciesData[idx].name);
     setSpeciesId(speciesData[idx]._id);
-  }
+  };
 
   const handleHomeworldChange = e => {
     const idx = e.target.value;
     setHomeworld(planetsData[idx].name);
     setHomeworldId(planetsData[idx]._id);
-  }
+  };
 
   const handleFilmCheck = e => {
     const idx = e.target.value;
@@ -52,7 +52,7 @@ const CreateCharacter = props => {
     if (newFilmSet[idx]) delete newFilmSet[idx];
     else newFilmSet[idx] = true;
     setFilmSet(newFilmSet);
-  }
+  };
 
   const saveCharacter = () => {
     // check if name is empty
@@ -63,11 +63,11 @@ const CreateCharacter = props => {
       setHeightError('must be a number');
     } else {
       const films = [];
-      for (let idx in filmSet) {
+      for (const idx in filmSet) {
         films.push({
           title: filmsData[idx].title,
           id: filmsData[idx]._id
-        })
+        });
       }
       const body = {
         name,
@@ -83,21 +83,21 @@ const CreateCharacter = props => {
         homeworld,
         homeworld_id,
         films
-      }
+      };
       fetch('/api/character', {
         method: 'POST',
         headers: {
-          "Content-Type": "Application/JSON"
+          'Content-Type': 'Application/JSON'
         },
         body: JSON.stringify(body)
       })
-      .then(resp => resp.json())
-      .then(data => {
-        props.history.push('/');
-      })
-      .catch(err => console.log('CreateCharacter fetch /api/character: ERROR: ', err));
+        .then(resp => resp.json())
+        .then(data => {
+          props.history.push('/');
+        })
+        .catch(err => console.log('CreateCharacter fetch /api/character: ERROR: ', err));
     }
-  }
+  };
 
   // useEffect to clear nameError when `name` is changed
   useEffect(()=>{
@@ -112,13 +112,13 @@ const CreateCharacter = props => {
   const speciesOptions = speciesData.map((speciesObj, idx) => {
     return (
       <option key={idx} value={idx}>{speciesObj.name}</option>
-    )
+    );
   });
 
   const homeworldOptions = planetsData.map((planetObj, idx) => {
     return (
       <option key={idx} value={idx}>{planetObj.name}</option>
-    )
+    );
   });
   
   const filmCheckboxes = filmsData.map((filmObj, idx) => {
@@ -127,19 +127,19 @@ const CreateCharacter = props => {
         <input type="checkbox" className="filmCheckbox" value={idx} onChange={handleFilmCheck}></input>
         <span className="checkboxLabel">{filmObj.title}</span>
       </div>
-    )
+    );
   });
 
   return (
     <section className="mainSection createCharContainer">
       <header className="pageHeader">
-          <h2>Character Creator</h2>
-          <Link to="/" className="backLink">
-            <button type="button" className="btnSecondary">
+        <h2>Character Creator</h2>
+        <Link to="/" className="backLink">
+          <button type="button" className="btnSecondary">
               Back to all characters
-            </button>
-          </Link>
-        </header>
+          </button>
+        </Link>
+      </header>
       <article className="card createChar">
         <h3>Enter your character details</h3>
         <div className="createCharFields">
@@ -204,7 +204,7 @@ const CreateCharacter = props => {
         </div>
       </article>
     </section>
-  )
-}
+  );
+};
 
 export default withRouter(CreateCharacter);

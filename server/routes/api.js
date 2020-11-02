@@ -1,4 +1,3 @@
-/* eslint-disable function-paren-newline */
 const express = require('express');
 
 const starWarsController = require('../controllers/starWarsController');

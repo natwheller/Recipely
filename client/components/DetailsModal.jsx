@@ -32,57 +32,57 @@ const SpeciesModal = ({ type, position, id, closeModal }) => {
 
   let info;
   switch(type) {
-    case 'species':
-      const { classification, average_height, average_lifespan, language, homeworld } = details;
-      info = (
-        <ul className="modalList">
-          <li className="modalDetail">Classification: {classification}</li>
-          <li className="modalDetail">Average Height: {average_height}</li>
-          <li className="modalDetail">Average Lifespan: {average_lifespan}</li>
-          <li className="modalDetail">Language: {language}</li>
-          <li className="modalDetail">Homeworld: {homeworld}</li>
-        </ul>
-      );
-      break;
-    case 'homeworld':
-      const { rotation_period, orbital_period, diameter, climate, gravity, terrain, surface_water, population } = details;
-      info = (
-        <ul className="modalList">
-          <li className="modalDetail">Rotation Period: {rotation_period}</li>
-          <li className="modalDetail">Orbital Period: {orbital_period}</li>
-          <li className="modalDetail">Diameter: {diameter}</li>
-          <li className="modalDetail">Climate: {climate}</li>
-          <li className="modalDetail">Gravity: {gravity}</li>
-          <li className="modalDetail">Terrain: {terrain}</li>
-          <li className="modalDetail">Surface Water: {surface_water}</li>
-          <li className="modalDetail">Population: {population}</li>
-        </ul>
-      );
-      break;
-    case 'film':
-      const { episode_id, director, producer, release_date } = details;
-      info = (
-        <ul className="modalList">
-          <li className="modalDetail">Episode: {episode_id}</li>
-          <li className="modalDetail">Director {director}</li>
-          <li className="modalDetail">Producer: {producer}</li>
-          <li className="modalDetail">Release Date: {new Date(release_date).toDateString().slice(4)}</li>
-        </ul>
-      );
-      break;
-    default:
-      info = (<p>Unexpected modal type</p>);
+  case 'species':
+    const { classification, average_height, average_lifespan, language, homeworld } = details;
+    info = (
+      <ul className="modalList">
+        <li className="modalDetail">Classification: {classification}</li>
+        <li className="modalDetail">Average Height: {average_height}</li>
+        <li className="modalDetail">Average Lifespan: {average_lifespan}</li>
+        <li className="modalDetail">Language: {language}</li>
+        <li className="modalDetail">Homeworld: {homeworld}</li>
+      </ul>
+    );
+    break;
+  case 'homeworld':
+    const { rotation_period, orbital_period, diameter, climate, gravity, terrain, surface_water, population } = details;
+    info = (
+      <ul className="modalList">
+        <li className="modalDetail">Rotation Period: {rotation_period}</li>
+        <li className="modalDetail">Orbital Period: {orbital_period}</li>
+        <li className="modalDetail">Diameter: {diameter}</li>
+        <li className="modalDetail">Climate: {climate}</li>
+        <li className="modalDetail">Gravity: {gravity}</li>
+        <li className="modalDetail">Terrain: {terrain}</li>
+        <li className="modalDetail">Surface Water: {surface_water}</li>
+        <li className="modalDetail">Population: {population}</li>
+      </ul>
+    );
+    break;
+  case 'film':
+    const { episode_id, director, producer, release_date } = details;
+    info = (
+      <ul className="modalList">
+        <li className="modalDetail">Episode: {episode_id}</li>
+        <li className="modalDetail">Director {director}</li>
+        <li className="modalDetail">Producer: {producer}</li>
+        <li className="modalDetail">Release Date: {new Date(release_date).toDateString().slice(4)}</li>
+      </ul>
+    );
+    break;
+  default:
+    info = (<p>Unexpected modal type</p>);
   }
 
   return (
     <div className="modal" style={position}>
       <div className="modalHeading">
-        <h4 className="modalName">{details.name || details.title || "Unknown"}</h4>
+        <h4 className="modalName">{details.name || details.title || 'Unknown'}</h4>
         <FAIcon icon={faTimes} onClick={closeModal} />
       </div>
       {info}
     </div>
-  )
-}
+  );
+};
 
 export default SpeciesModal;

@@ -34,6 +34,8 @@
     "concurrently": "^5.0.0",
     "cross-env": "^6.0.3",
     "css-loader": "^1.0.1",
+    "eslint": "^7.12.1",
+    "eslint-plugin-react": "^7.21.5",
     "file-loader": "^4.0.0",
     "html-webpack-plugin": "^3.2.0",
     "nodemon": "^1.18.9",
