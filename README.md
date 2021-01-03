@@ -40,8 +40,6 @@ You do not need to modify any frontend code, only the backend, but feel free to 
 1. [ ] You should already have an ElephantSQL database in the cloud with the Star Wars database loaded from the [Unit 10 Skill Builder](https://github.com/CodesmithLLC/unit-10SB-databases). We will be using the same database so be sure to have the connection URL handy.
 1. [ ] Install your npm dependencies by running `npm install` in your terminal.
 1. [ ] Run `npm run dev` to start your server and bundle the frontend. It will launch the frontend application in a browser window which will currently have no characters.
-   * NOTE:  If you are having trouble loading the page, run `node -v` to get the version of node installed on your computer and ensure you have the [latest stable (LTS) version](https://nodejs.org/en/) and not an unstable version. 
-   If you have an unstable version, run `npm install -g n` to install n globally - `n` allows us to interact with different Node.js versions. Next, run `sudo n stable` to downgrade to the latest stable version or `sudo n versionnumber` to download a specific version of node. 
 
 #### Set up your database connection
 1. [ ] Take a look into `server/models/starWarsModels.js`. Add your connection URL to the ElephantSQL database into `PG_URI`.
@@ -50,7 +48,7 @@ You do not need to modify any frontend code, only the backend, but feel free to 
 1. [ ] Now we are ready to send queries using `pool.query()` to the database. At the bottom of this file, we are exporting an object with a property called query, which is a function that will return the invocation of `pool.query()`. In betweent this, we can add `console.log` for all the queries being made for tracking purposes.
    * NOTE: While we could export the pool from here and just use `pool.query()` directly from the controller, exporting this way let's us controller all the database queries from one file location and any logic or logging that needs to change lives in this one file.
 1. [ ] Here is the ER diagram of the database again to reference for the upcoming sections:
-![pg_schema](/docs/assets/images/schema.png)
+![pg_schema](/docs/images/schema.png)
 
 #### Get and serve characters
 1. [ ] On load, the frontend will be making a GET request to `/api/` to get an array of characters. Check out the route handlers in the `server/routes/api.js` file. Notice it is using `starWarsController.getCharacters` as a middleware, and afterwards sending a JSON response with an empty array.
@@ -61,9 +59,9 @@ You do not need to modify any frontend code, only the backend, but feel free to 
    * Be mindful of asynchronicity here. `pool.query()` is asynchronous so make sure you are moving onto the next middleware at the right time (after the query results are back).
    * Also practice good error handling. If the database query results in an error, we want to use the express global error handler by calling `next` with an error object passed in.
 1. [ ] Back in the `server/routes/api.js` file, finish out the `/api/` GET route by sending the query results stored in `res.locals` as JSON response to the frontend.
-   * The frontend is expecting to receive an array of objects so make sure your response matches that.
+   * The frontend is expecing to receive an array of objects so make sure your response matches that.
    * Refreshing the frontend app should now display character cards based on the data that was passed.
-1. [ ] Take a closer look at the character cards though. There will be some information missing like homeworld and species. To be more specific, the frontend is expecting each character object in the array we send back to contain the following properties: name, gender, species, species_id, birth_year, eye_color, hair_color, homeworld, homeworld_id, and films (which should be an array of objects with keys: title and id). We will need to modify our SQL query to gather all the relevant data.
+1. [ ] Take a closer look at the character cards though. There will be some information missing like homeworld and species. To be more specific, the frontend is expecing each character object in the array we send back to contain the following properties: name, gender, species, species_id, birth_year, eye_color, hair_color, homeworld, homeworld_id, and films (which should be an array of objects with keys: title and id). We will need to modify our SQL query to gather all the relevant data.
    * In order to collect all the data required for this response, we will need to adjust our SQL query to pull data from multiple tables besides **people**. It may be helpful to consult the ER Diagram of all the tables and columns in our database given above.
    * HINT: _species_ will come from the _name_ of the species (as _species_) corresponding to _species\_id_ in the **species** table and _homeworld_ will come from the _name_ of the planet (as _homeworld_) corresponding to the _homeworld\_id_ in the **planets** table. Can we write a query to make sure we select everything from the **people** table and fill in additionally from the **species** table and the **planets** table? It could be helpful to try out the queries in ElephantSQL's browser, pgAdmin, or the `psql` command line as you did for the skill builder.
    * Check the frontend again by refereshing to see if the missing details have been populated.
@@ -105,14 +103,14 @@ You do not need to modify any frontend code, only the backend, but feel free to 
 #### Set up / Install
 1. [ ] Make sure you have committed your work from working on pg above. Then we will switch to a branch set up for this part by running the command `git checkout mongoose` in your terminal.
 1. [ ] Install the MongoDB Community edition by following the instructions on the links below.
-   * [Linux](https://docs.mongodb.com/manual/administration/install-on-linux/) - select your distro (Ubuntu users can select Debian)
+   * [Linux](https://docs.mongodb.com/manual/administration/install-on-linux/) - select your distro
    * [MacOS](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/) - must have homebrew
    * [Windows](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
    * You can check to make sure the CLI is installed by typing `mongo --version` in a terminal.
 1. [ ] Sign up for a MongoDB Atlas account [here](https://www.mongodb.com/cloud/atlas).
    * Choose a provider and region where the free tier is available and select that free tier. Be sure to opt out of any featuers like backups that will cost extra.
    * Go to your Cluster view and click on **CONNECT**.
-    ![mongodb_atlas_connect](/docs/assets/images/mongodb_atlas_connect.png)
+    ![mongodb_atlas_connect](/docs/images/mongodb_atlas_connect.png)
    * Setup connection security by whitelisting your connection IP address and creating a MongoDB User. Remember this username and password for the next step.
    * For the connection method, select "Connect Your Application" and copy the connection string.
    * Open a terminal in this project directory and run the command below. Make sure you have replaced `<password>` in your connection string with your MongoDB user password created earlier and wrap the entire string with double quotes. This command will create a database called **starwars** in your cloud database with data from the `dump/` folder.
@@ -173,7 +171,7 @@ You do not need to modify any frontend code, only the backend, but feel free to 
         | homeworld_id    | ObjectId referencing 'planet'  |
         | height          | Number                         |
         | films           | Array of objects with keys: title (String), id (ObjectId referencing 'film') |
-1. [ ] Notice at the bottom of the file that we are exporting all the created models from this file in an object that will be required in the controller file.
+1. [ ] Notice at the bottom of the file that we are exporting the created Species model from this file in an object that will be required in the controller file. Uncomment the others as you go along so they can be exported as well!
 
 #### Get and serve characters
 1. [ ] The setup here is similar to Part 1. On load, the frontend makes a GET request to `/api/` to get an array of characters. Check out the route handlers are in the `server/routes/api.js` file and controllers are in the `server/controllers/starWarsController.js` file.

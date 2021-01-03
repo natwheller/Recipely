@@ -16,18 +16,15 @@ app.use(express.urlencoded({ extended: true }));
 /**
  * handle requests for static files
  */
-app.use('/assets', express.static(path.resolve(__dirname, '../client/assets')));
+app.use(express.static(path.resolve(__dirname, '../client')));
 
 /**
  * define route handlers
  */
 app.use('/api', apiRouter);
 
-// respond with main app
-app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../client/index.html')));
-
 // catch-all route handler for any requests to an unknown route
-app.use((req, res) => res.status(404).send('This is not the page you\'re looking for..'));
+app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
 
 /**
  * express error handler
