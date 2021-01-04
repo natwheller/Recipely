@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
@@ -33,6 +31,6 @@ const App = props => {
       </main>
     </div>
   );
-}
+};
 
 export default App;

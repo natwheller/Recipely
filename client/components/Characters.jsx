@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -45,7 +44,7 @@ class Characters extends Component {
         position,
         id
       }
-    })
+    });
   }
 
   closeModal() {
@@ -54,7 +53,7 @@ class Characters extends Component {
         ...this.state.modalState,
         open: false
       }
-    })
+    });
   }
 
   render() {
@@ -86,7 +85,7 @@ class Characters extends Component {
       <section className="mainSection">
         <header className="pageHeader">
           <h2>Characters</h2>
-          <Link to={`/create`}>
+          <Link to={'/create'}>
             <button
               type="button"
               className="btnSecondary"
