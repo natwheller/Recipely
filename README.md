@@ -117,10 +117,19 @@ You do not need to modify any frontend code, only the backend, but feel free to 
 
 1. [ ] Make sure you have committed your work from working on pg above. Then we will switch to a branch set up for this part by running the command `git checkout mongoose` in your terminal.
 1. [ ] Install the MongoDB Community edition by following the instructions on the links below.
+
    - [Linux](https://docs.mongodb.com/manual/administration/install-on-linux/) - select your distro
    - [MacOS](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/) - must have homebrew
-   - [Windows](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
+   - [Windows (native)](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
+   - [WSL](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-database#install-mongodb):
+
+     1. Open a WSL terminal
+     2. Update your Ubuntu packages: `sudo apt update`
+     3. Once the packages have updated, install MongoDB with: `sudo apt install mongodb`
+     4. Confirm installation and get the version number: `mongod --version` and `mongo --version`
+
    - You can check to make sure the CLI is installed by typing `mongo --version` in a terminal.
+
 1. [ ] Sign up for a MongoDB Atlas account [here](https://www.mongodb.com/cloud/atlas).
    - Choose a provider and region where the free tier is available and select that free tier. Be sure to opt out of any features like backups that will cost extra.
    - Go to your Cluster view and click on **CONNECT**.
