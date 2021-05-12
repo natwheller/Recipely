@@ -9,7 +9,7 @@ const pool = new Pool({
 
 // Adding some notes about the database here will be helpful for future you or other developers.
 // Schema for the database can be found below:
-// https://github.com/CodesmithLLC/unit-10SB-databases/blob/master/docs/images/schema.png?raw=true
+// https://github.com/CodesmithLLC/unit-10SB-databases/blob/master/docs/assets/images/schema.png
 
 // We export an object that contains a property called query,
 // which is a function that returns the invocation of pool.query() after logging the query
