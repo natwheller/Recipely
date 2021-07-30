@@ -123,12 +123,16 @@ You do not need to modify any frontend code, only the backend, but feel free to 
    - [Windows (native)](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
    - [WSL](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-database#install-mongodb):
 
-     1. Open a WSL terminal
+     1. Open your WSL terminal (ie. Ubuntu 20.04)
      2. Update your Ubuntu packages: `sudo apt update`
-     3. Once the packages have updated, install MongoDB with: `sudo apt install mongodb`
-     4. Confirm installation and get the version number: `mongod --version` and `mongo --version`
+     3. Once the packages have updated, install MongoDB with: `sudo apt-get install mongodb`
+     4. Confirm installation and get the version number: `mongod --version`
 
-   - You can check to make sure the CLI is installed by typing `mongo --version` in a terminal.
+        There are 3 commands you need to know once MongoDB is installed:
+
+        - `sudo service mongodb status` for checking the status of your database.
+        - `sudo service mongodb start` to start running your database.
+        - `sudo service mongodb stop` to stop running your database.
 
 1. [ ] Sign up for a MongoDB Atlas account [here](https://www.mongodb.com/cloud/atlas).
    - Choose a provider and region where the free tier is available and select that free tier. Be sure to opt out of any features like backups that will cost extra.
