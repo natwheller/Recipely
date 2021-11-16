@@ -80,7 +80,7 @@ You do not need to modify any frontend code, only the backend, but feel free to 
 1. [ ] You'll notice in the frontend character card, next to the species is a blue question mark which when click opens up a modal. However, the detailed data is not yet populated. The frontend makes a GET request to `/api/species` for this information. The GET request will include the id of the species in a query string like `/api/species?id=1`.
 1. [ ] The route handler is already there in the `server/routes/api.js` file but we will have to complete the `starWarsController.getSpecies` middleware in `server/controllers/starWarsController.js`.
    - Grab the id from the **req**uest's query string and save it to a variable.
-   - Write a SQL query to get the classification, average_height, average_lifespan, language, and homeworld of the species using this id. Check the `node-postgres` documentations as to how to pass in a [parameterized query](https://node-postgres.com/features/queries#Parameterized%20query) so that you can pass in the `_id` safely into the SQL query.
+   - Write a SQL query to get the classification, average_height, average_lifespan, language, name, and homeworld of the species using this id. Check the `node-postgres` documentations as to how to pass in a [parameterized query](https://node-postgres.com/features/queries#Parameterized%20query) so that you can pass in the `_id` safely into the SQL query.
    - HINT: Getting the name of the homeworld will require a join to get the _name_ of the _planet_ as _homeworld_.
    - Once you've obtained the data, save it for the next middleware, and send a JSON response to the frontend an object with all the properties mentioned above.
    - Check the frontend to see if the modal now populates with the appropriate data for each species.
@@ -140,7 +140,7 @@ You do not need to modify any frontend code, only the backend, but feel free to 
      ![mongodb_atlas_connect](/docs/assets/images/mongodb_atlas_connect.png)
    - Setup connection security by whitelisting your connection IP address and creating a MongoDB User. Remember this username and password for the next step.
    - For the connection method, select "Connect Your Application" and copy the connection string.
-   - Open a terminal in this project directory and run the command below. Make sure you have replaced `<password>` in your connection string with your MongoDB user password created earlier and wrap the entire string with double quotes. This command will create a database called **starwars** in your cloud database with data from the `dump/` folder.
+   - Open a terminal in this project directory and run the command below. Make sure you have replaced `<password>` in your connection string with your MongoDB user password created earlier and wrap the entire string with quotes (depending on your OS or shell terminal version, you may need to use either single quotes *or* double quotes. This command will create a database called **starwars** in your cloud database with data from the `dump/` folder.
    ```
     mongorestore --uri="<YOUR_CONNECTION_STRING>"
    ```
@@ -178,7 +178,7 @@ You do not need to modify any frontend code, only the backend, but feel free to 
      | ------------- | ------ |
      | title         | String |
      | episode_id    | Number |
-     | opening_Crawl | String |
+     | opening_crawl | String |
      | director      | String |
      | producer      | String |
      | release_date  | Date   |
