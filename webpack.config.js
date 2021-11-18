@@ -18,16 +18,17 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: 8080,
-    // match the output path
-    contentBase: path.resolve(__dirname, 'dist'),
     // enable HMR on the devServer
     hot: true,
-    // match the output 'publicPath'
-    publicPath: '/',
     // fallback to root for other urls
     historyApiFallback: true,
 
-    inline: true,
+    static: {
+      // match the output path
+      directory: path.resolve(__dirname, 'dist'),
+      // match the output 'publicPath'
+      publicPath: '/',
+    },
 
     headers: { 'Access-Control-Allow-Origin': '*' },
     /**
