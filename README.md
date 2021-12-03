@@ -119,7 +119,6 @@ You do not need to modify any frontend code, only the backend, but feel free to 
 2. [ ] If you haven't installed MongoDB during the precourse, follow the instructions linked below.
    - [Installing MongoDB on MacOS](https://github.com/CodesmithLLC/dev-environment-setup/blob/main/mac-os.md#install-mongodb)
    - [Installing MongoDB on Windows](https://github.com/CodesmithLLC/dev-environment-setup/blob/main/windows-os.md#install-mongodb)
-
 3. [ ] Sign up for a MongoDB Atlas account [here](https://www.mongodb.com/cloud/atlas).
    - Choose a provider and region where the free tier is available and select that free tier. Be sure to opt out of any features like backups that will cost extra.
    - Go to your Cluster view and click on **CONNECT**.
