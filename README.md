@@ -116,25 +116,10 @@ You do not need to modify any frontend code, only the backend, but feel free to 
 #### Set up / Install
 
 1. [ ] Make sure you have committed your work from working on pg above. Then we will switch to a branch set up for this part by running the command `git checkout mongoose` in your terminal.
-1. [ ] Install the MongoDB Community edition by following the instructions on the links below.
-
-   - [Linux](https://docs.mongodb.com/manual/administration/install-on-linux/) - select your distro
-   - [MacOS](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/) - must have homebrew
-   - [Windows (native)](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
-   - [WSL](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-database#install-mongodb):
-
-     1. Open your WSL terminal (ie. Ubuntu 20.04)
-     2. Update your Ubuntu packages: `sudo apt update`
-     3. Once the packages have updated, install MongoDB with: `sudo apt-get install mongodb`
-     4. Confirm installation and get the version number: `mongod --version`
-
-        There are 3 commands you need to know once MongoDB is installed:
-
-        - `sudo service mongodb status` for checking the status of your database.
-        - `sudo service mongodb start` to start running your database.
-        - `sudo service mongodb stop` to stop running your database.
-
-1. [ ] Sign up for a MongoDB Atlas account [here](https://www.mongodb.com/cloud/atlas).
+2. [ ] If you haven't installed MongoDB during the precourse, follow the instructions linked below.
+   - [Installing MongoDB on MacOS](https://github.com/CodesmithLLC/dev-environment-setup/blob/main/mac-os.md#install-mongodb)
+   - [Installing MongoDB on Windows](https://github.com/CodesmithLLC/dev-environment-setup/blob/main/windows-os.md#install-mongodb)
+3. [ ] Sign up for a MongoDB Atlas account [here](https://www.mongodb.com/cloud/atlas).
    - Choose a provider and region where the free tier is available and select that free tier. Be sure to opt out of any features like backups that will cost extra.
    - Go to your Cluster view and click on **CONNECT**.
      ![mongodb_atlas_connect](/docs/assets/images/mongodb_atlas_connect.png)
@@ -148,8 +133,8 @@ You do not need to modify any frontend code, only the backend, but feel free to 
    - NOTE: Take a look at the **people** collection of your database and see the documents that are stored there. To take full advantage of the performance benefits of using a NoSQL database, some data have been _denormalized_. Which of the keys in the database do you think those are? What are the pros and cons of doing such denormalization?
    - The denormalization can make certain retrieval of data easier and faster as we will see shortly but we do that at the cost of losing _consistency_. The same information now lives in multiple places so if we need to insert or update data it makes it more costly and difficult as well as taking up more space due to having redundant data. We also do not have one source of truth but have multiple sources which can be problematic.
    - Some properties in this collection are also references to other objects/documents, similar to a foreign key in SQL. However, MongoDB does not enforce referential integrity such that this reference is not guaranteed to actually point to an existing document like a SQL foreign key would. The reference could point to nothing but the database will not complain, making it somewhat dangerous.
-1. [ ] Now, install your npm dependencies by running `npm install` in your terminal.
-1. [ ] Run `npm run dev` to start your server and bundle the frontend. It will launch the frontend application in a browser window which will currently have no characters.
+4. [ ] Now, install your npm dependencies by running `npm install` in your terminal.
+5. [ ] Run `npm run dev` to start your server and bundle the frontend. It will launch the frontend application in a browser window which will currently have no characters.
 
 #### Set up your model
 
