@@ -5,15 +5,15 @@ const starWarsController = require('../controllers/starWarsController');
 const router = express.Router();
 
 router.get('/', starWarsController.getCharacters, (req, res) =>
-  res.status(200).json(res.locals.dbQuery)
+  res.status(200).json(res.locals.getCharacters)
 );
 
 router.get('/species', starWarsController.getSpecies, (req, res) =>
-  res.status(200).json({})
+  res.status(200).json(res.locals.getSpecies)
 );
 
 router.get('/homeworld', starWarsController.getHomeworld, (req, res) =>
-  res.status(200).json({})
+  res.status(200).json(res.locals.getHomeworld)
 );
 
 router.get('/film', starWarsController.getFilm, (req, res) =>
