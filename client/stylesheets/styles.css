@@ -98,9 +98,10 @@ body {
 
 .card {
   color: black;
-  background: #f3f3f3;
+  background: #e1b86d;
   padding: 2rem;
-  border: 1px solid lightgray;
+  border-radius: 10px;
+  border: 1px solid rgb(240, 158, 57);
   box-shadow: 1px 1px 5px rgba(22, 22, 22, 0.915);
 }
 

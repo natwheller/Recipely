@@ -1,27 +1,29 @@
 const express = require('express');
 
-const starWarsController = require('../controllers/starWarsController');
+const recipeController = require('../controllers/recipeController');
 
 const router = express.Router();
 
-router.get('/', starWarsController.getCharacters, (req, res) =>
-	res.status(200).json(res.locals.getCharacters)
+router.get('/', recipeController.getRecipes, (req, res) =>
+	res.status(200).json(res.locals.getRecipes)
 );
 
-router.get('/species', starWarsController.getSpecies, (req, res) =>
-	res.status(200).json(res.locals.getSpecies)
+router.get('/ingredients', recipeController.getIngredients, (req, res) =>
+	res.status(200).json(res.locals.getIngredients)
 );
+// // http://localhost:8080/api/ingredients?id=1
 
-router.get('/homeworld', starWarsController.getHomeworld, (req, res) =>
-	res.status(200).json(res.locals.getHomeworld)
-);
+// router.get('/directions', recipeController.getDirections, (req, res) =>
+// 	res.status(200).json(res.locals.getDirections)
+// );
+// // http://localhost:8080/api/homeworld?id=1
 
-router.get('/film', starWarsController.getFilm, (req, res) =>
-	res.status(200).json({})
-);
+// router.post('/recipe', recipeController.addRecipe, (req, res) =>
+// 	res.status(200).json()
+// );
 
-router.post('/character', starWarsController.addCharacter, (req, res) =>
-	res.status(200).json()
-);
+// need to add update recipe
+
+// need to add delete recipe
 
 module.exports = router;
