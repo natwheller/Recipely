@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
-// change this style icon!
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+import { faUtensils } from '@fortawesome/free-solid-svg-icons';
 
 const RecipeCard = ({ info, openModal }) => {
 	const { name, recipe_id, prep_time, cook_time, serving_size, image_url } =
@@ -10,8 +10,8 @@ const RecipeCard = ({ info, openModal }) => {
 	// this is what shows us the additional details when you click on the Q marks
 	// e is the click event, type is the category on the card, id is the id
 	const openDetailsModal = (e, type, id) => {
-		const top = e.pageY;
-		const left = e.pageX;
+		const top = e.pageY + 10;
+		const left = e.pageX + 10;
 		openModal(type, { top, left }, id);
 	};
 
@@ -35,30 +35,27 @@ const RecipeCard = ({ info, openModal }) => {
 					{serving_size}
 				</li>
 				<li className='charDetail'>
-					<b>Ingredients: </b>See more
+					<b>Ingredients: </b>Click for more...
 					<span className='icon'>
 						<FAIcon
-							icon={faQuestionCircle}
-							size='xs'
+							icon={faUtensils}
+							size='s'
 							style={{ color: 'purple' }}
 							onClick={(e) => openDetailsModal(e, 'ingredients', recipe_id)}
 						/>
 					</span>
 				</li>
-				{/* <li className='charDetail'>
-					<b>Directions: </b>
-					{homeworld}{' '}
+				<li className='charDetail'>
+					<b>Directions: </b>Click for more...
 					<span className='icon'>
 						<FAIcon
-							icon={faQuestionCircle}
-							size='xs'
+							icon={faUtensils}
+							size='s'
 							style={{ color: 'steelBlue' }}
-							onClick={(e) => openDetailsModal(e, 'homeworld', homeworld_id)}
+							onClick={(e) => openDetailsModal(e, 'directions', recipe_id)}
 						/>
 					</span>
-				</li> */}
-				{/* <p className='charAddlDetail'>Films:</p>
-				<ul className='charFilmsList'>{filmData}</ul> */}
+				</li>
 			</ul>
 		</article>
 	);

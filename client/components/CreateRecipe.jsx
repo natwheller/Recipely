@@ -22,7 +22,7 @@ const CreateRecipe = (props) => {
 	const [cook_time, cookTimeOnChange] = useInput('');
 	const [serving_size, servingSizeOnChange] = useInput('');
 	const [image_url, imageUrlOnChange] = useInput('');
-
+	// add input fields for directions and ingredients
 	const [species, setSpecies] = useState(speciesData[0].name);
 	const [species_id, setSpeciesId] = useState(speciesData[0]._id);
 	const [homeworld, setHomeworld] = useState(planetsData[0].name);
@@ -58,6 +58,7 @@ const CreateRecipe = (props) => {
 			species_id,
 			homeworld,
 			homeworld_id,
+			//need to add ingredients and directions here
 		};
 
 		fetch('/api/recipe', {

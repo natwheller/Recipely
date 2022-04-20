@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Characters from './components/Characters';
-import CreateCharacter from './components/CreateCharacter';
+import Recipes from './components/Recipes';
+import CreateRecipe from './components/CreateRecipe';
 
 import './stylesheets/styles.css';
 
@@ -19,8 +19,8 @@ const App = (props) => {
               https://reacttraining.com/react-router/web/guides/quick-start
         */}
 				<Switch>
-					<Route exact path='/' component={Characters} />
-					<Route exact path='/create' component={CreateCharacter} />
+					<Route exact path='/' component={Recipes} />
+					<Route exact path='/create' component={CreateRecipe} />
 				</Switch>
 			</main>
 		</div>

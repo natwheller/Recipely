@@ -8,8 +8,8 @@ class Recipes extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			fetchedChars: false,
-			characters: [],
+			fetchedRecipes: false,
+			recipes: [],
 			modalState: {
 				open: false,
 				type: null,
@@ -25,18 +25,15 @@ class Recipes extends Component {
 	componentDidMount() {
 		fetch('/api/')
 			.then((res) => res.json())
-			.then((characters) => {
-				if (!Array.isArray(characters)) characters = [];
+			.then((recipes) => {
+				if (!Array.isArray(recipes)) recipes = [];
 				return this.setState({
-					characters,
-					fetchedChars: true,
+					recipes,
+					fetchedRecipes: true,
 				});
 			})
 			.catch((err) =>
-				console.log(
-					'Characters.componentDidMount: get characters: ERROR: ',
-					err
-				)
+				console.log('Recipes.componentDidMount: get recipes: ERROR: ', err)
 			);
 	}
 
@@ -62,21 +59,21 @@ class Recipes extends Component {
 	}
 
 	render() {
-		if (!this.state.fetchedChars)
+		if (!this.state.fetchedRecipes)
 			return (
 				<div>
-					<h1>Loading data, please wait...</h1>
+					<h1>Loading info, please wait...</h1>
 				</div>
 			);
 
-		const { characters } = this.state;
+		const { recipes } = this.state;
 
-		if (!characters) return null;
+		if (!recipes) return null;
 
-		if (!characters.length) return <div>Sorry, no recipes found</div>;
+		if (!recipes.length) return <div>Sorry, no recipes found</div>;
 
-		const charElems = characters.map((char, i) => {
-			return <RecipeCard key={i} info={char} openModal={this.openModal} />;
+		const recipeElems = recipes.map((recipe, i) => {
+			return <RecipeCard key={i} info={recipe} openModal={this.openModal} />;
 		});
 
 		return (
@@ -89,7 +86,7 @@ class Recipes extends Component {
 						</button>
 					</Link>
 				</header>
-				<div className='charContainer'>{charElems}</div>
+				<div className='charContainer'>{recipeElems}</div>
 				{this.state.modalState.open && (
 					<DetailsModal
 						type={this.state.modalState.type}

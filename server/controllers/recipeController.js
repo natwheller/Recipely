@@ -17,7 +17,7 @@ recipeController.getRecipes = async (req, res, next) => {
 		// ) res;`;
 
 		const dbQuery = await db.query(sql);
-		console.log(dbQuery.rows);
+		// console.log(dbQuery.rows);
 		res.locals.getRecipes = await dbQuery.rows;
 		return next();
 	} catch (err) {
@@ -33,18 +33,13 @@ recipeController.getRecipes = async (req, res, next) => {
 
 recipeController.getIngredients = async (req, res, next) => {
 	try {
-		const queryStr =
-			//     `SELECT species.*, p.name AS homeworld
-			//     FROM (SELECT * FROM species WHERE species._id = ${req.query.id}) species
-			//     LEFT OUTER JOIN planets p
-			//     ON p._id = species.homeworld_id`;
-			`SELECT * FROM ingredients
+		const queryStr = `SELECT * FROM ingredients
 			WHERE recipe_id = ${req.query.id}`;
 
 		const dbQuery = await db.query(queryStr);
 		// console.log(dbQuery);
 		res.locals.getIngredients = dbQuery.rows[0];
-		console.log(dbQuery.rows[0]);
+		// console.log(dbQuery.rows[0]);
 		return next();
 	} catch (err) {
 		return next({
@@ -57,27 +52,26 @@ recipeController.getIngredients = async (req, res, next) => {
 	}
 };
 
-// starWarsController.getHomeworld = async (req, res, next) => {
-// 	// write code here
-// 	try {
-// 		const queryStr = `SELECT planets.*
-//     FROM planets
-//     WHERE planets._id = ${req.query.id}`;
-// 		// SELECT all columns from the planets table where the planets id = the planets id in the request
-// 		const dbQuery = await db.query(queryStr);
-// 		// console.log(dbQuery);
-// 		res.locals.getHomeworld = dbQuery.rows[0];
-// 		return next();
-// 	} catch (err) {
-// 		return next({
-// 			log: `starWarsController.getHomeworld: ERROR ${
-// 				typeof err === 'object' ? JSON.stringify(err) : err
-// 			}`,
-// 			message:
-// 				'Error occured in starWarsController.getHomeworld. See server log for details.',
-// 		});
-// 	}
-// };
+recipeController.getDirections = async (req, res, next) => {
+	try {
+		const queryStr = `SELECT * FROM directions
+			WHERE recipe_id = ${req.query.id}`;
+
+		const dbQuery = await db.query(queryStr);
+		// console.log(dbQuery);
+		res.locals.getDirections = dbQuery.rows[0];
+		// console.log(dbQuery.rows[0]);
+		return next();
+	} catch (err) {
+		return next({
+			log: `recipeController.getDirections: ERROR ${
+				typeof err === 'object' ? JSON.stringify(err) : err
+			}`,
+			message:
+				'Error occured in recipeController.getDirections. See server log for details.',
+		});
+	}
+};
 
 // starWarsController.addCharacter = async (req, res, next) => {
 // 	const text =

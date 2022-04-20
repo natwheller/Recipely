@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faUtensils } from '@fortawesome/free-solid-svg-icons';
+import { faGrinBeam, faSmile } from '@fortawesome/free-regular-svg-icons';
 
 const RecipesModal = ({ type, position, id, closeModal }) => {
 	const [details, setDetails] = useState({});
@@ -9,7 +10,6 @@ const RecipesModal = ({ type, position, id, closeModal }) => {
 	useEffect(() => {
 		if (id) {
 			setIsFetching(true);
-			// need to link this type - ingredients/directions and id=recipeid
 			fetch(`/api/${type}?id=${id}`)
 				.then((resp) => resp.json())
 				.then((data) => {
@@ -26,7 +26,7 @@ const RecipesModal = ({ type, position, id, closeModal }) => {
 	if (isFetching) {
 		return (
 			<div className='modal' style={position}>
-				<p>Fetching data...</p>
+				<p>Getting info...</p>
 			</div>
 		);
 	}
@@ -37,58 +37,67 @@ const RecipesModal = ({ type, position, id, closeModal }) => {
 			const { one, two, three, four, five, six, seven, eight, nine, ten } =
 				details;
 			info = (
-				<ul className='modalList'>
-					<li className='modalDetail'> {one}</li>
-					<li className='modalDetail'> {two}</li>
-					<li className='modalDetail'> {three}</li>
-					<li className='modalDetail'> {four}</li>
-					<li className='modalDetail'> {five}</li>
-					<li className='modalDetail'> {six}</li>
-					<li className='modalDetail'> {seven}</li>
-					<li className='modalDetail'> {eight}</li>
-					<li className='modalDetail'> {nine}</li>
-					<li className='modalDetail'> {ten}</li>
-				</ul>
+				<>
+					<div className='modalHeading'>
+						<h4 className='modalName'>Ingredients</h4>
+						<FAIcon icon={faTimes} onClick={closeModal} />
+					</div>
+					<ul className='modalList'>
+						<li className='modalDetail'> {one}</li>
+						<li className='modalDetail'> {two}</li>
+						<li className='modalDetail'> {three}</li>
+						<li className='modalDetail'> {four}</li>
+						<li className='modalDetail'> {five}</li>
+						<li className='modalDetail'> {six}</li>
+						<li className='modalDetail'> {seven}</li>
+						<li className='modalDetail'> {eight}</li>
+						<li className='modalDetail'> {nine}</li>
+						<li className='modalDetail'> {ten}</li>
+					</ul>
+				</>
 			);
 			break;
-		// case 'homeworld':
-		// 	const {
-		// 		rotation_period,
-		// 		orbital_period,
-		// 		diameter,
-		// 		climate,
-		// 		gravity,
-		// 		terrain,
-		// 		surface_water,
-		// 		population,
-		// 	} = details;
-		// 	info = (
-		// we can make this one an ol
-		// 		<ul className='modalList'>
-		// 			<li className='modalDetail'>1: {rotation_period}</li>
-		// 			<li className='modalDetail'>2: {orbital_period}</li>
-		// 			<li className='modalDetail'>3: {diameter}</li>
-		// 			<li className='modalDetail'>4: {climate}</li>
-		// 			<li className='modalDetail'>5: {gravity}</li>
-		// 			<li className='modalDetail'>6: {terrain}</li>
-		// 			<li className='modalDetail'>7: {surface_water}</li>
-		// 			<li className='modalDetail'>8: {population}</li>
-		// 			<li className='modalDetail'>9: {population}</li>
-		// 			<li className='modalDetail'>10: {population}</li>
-		// 		</ul>
-		// 	);
-		// 	break;
+		case 'directions':
+			const {
+				one_d,
+				two_d,
+				three_d,
+				four_d,
+				five_d,
+				six_d,
+				seven_d,
+				eight_d,
+				nine_d,
+				ten_d,
+			} = details;
+			info = (
+				<>
+					<div className='modalHeading'>
+						<h4 className='modalName'>Directions</h4>
+						<FAIcon icon={faTimes} onClick={closeModal} />
+					</div>
+					<ol className='modalList'>
+						{one_d ? <li className='modalDetail'>{one_d}</li> : null}
+						{two_d ? <li className='modalDetail'>{two_d}</li> : null}
+						{three_d ? <li className='modalDetail'>{three_d}</li> : null}
+						{four_d ? <li className='modalDetail'>{four_d}</li> : null}
+						{five_d ? <li className='modalDetail'>{five_d}</li> : null}
+						{six_d ? <li className='modalDetail'>{six_d}</li> : null}
+						{seven_d ? <li className='modalDetail'>{seven_d}</li> : null}
+						{eight_d ? <li className='modalDetail'>{eight_d}</li> : null}
+						{nine_d ? <li className='modalDetail'>{nine_d}</li> : null}
+						{ten_d ? <li className='modalDetail'>{ten_d}</li> : null}
+					</ol>
+				</>
+			);
+			break;
 
 		default:
-			info = <p>Unexpected modal type</p>;
+			info = <p>Unable to grab info</p>;
 	}
 
 	return (
 		<div className='modal' style={position}>
-			<div className='modalHeading'>
-				<h4 className='modalName'>Ingredients</h4>
-				<FAIcon icon={faTimes} onClick={closeModal} />
-			</div>
 			{info}
 		</div>
 	);

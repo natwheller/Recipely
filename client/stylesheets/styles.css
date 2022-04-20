@@ -97,7 +97,7 @@ body {
 }
 
 .card {
-  color: black;
+  color: rgb(49, 44, 44);
   background: #e1b86d;
   padding: 2rem;
   border-radius: 10px;
@@ -291,9 +291,9 @@ body {
   position: absolute;
   display: inline-block;
   padding: 0.8rem;
-  color: black;
-  background: #f3f3f3;
-  border: 1px solid lightgray;
+  color: rgb(49, 44, 44);
+  background: #ebbdbd;
+  border: 1px solid rgb(236, 152, 152);
   border-radius: 5%;
   box-shadow: 1px 1px 5px rgba(22, 22, 22, 0.915);
 }
