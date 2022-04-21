@@ -53,6 +53,7 @@ h3 {
 
 h4 {
   font-size: 1.5rem;
+  margin-top: 80px;
 }
 
 input, textarea {
@@ -192,6 +193,23 @@ body {
   height: 3rem;
   border-radius: 10px;
   width: 100%;
+}
+
+.search-btn {
+  background: #c5c3c3;
+  border: 1px solid rgb(134, 137, 139);
+  padding: 0rem 1rem;
+  height: 3rem;
+  border-radius: 10px;
+  width: 100%;
+  text-align: center;
+  color: black;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
 }
 
 .btnLg {

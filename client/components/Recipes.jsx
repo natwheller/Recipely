@@ -149,6 +149,11 @@ class Recipes extends Component {
 							Create Recipe
 						</button>
 					</Link>
+					<Link to={'/search'}>
+						<button type='button' className='btnnav'>
+							Search for a Recipe
+						</button>
+					</Link>
 				</header>
 				<div className='recipeContainer'>{recipeElems}</div>
 				{/* conditional rendering, if modal is open and has the below props*/}
