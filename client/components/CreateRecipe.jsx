@@ -83,7 +83,7 @@ const CreateRecipe = (props) => {
 					<label htmlFor='name'>Name: </label>
 					<input
 						name='name'
-						placeholder='Peanut Butter & Jelly'
+						placeholder='Enter name of your recipe'
 						value={name}
 						onChange={nameOnChange}
 					/>
@@ -93,7 +93,7 @@ const CreateRecipe = (props) => {
 					<label htmlFor='preptime'>Prep Time: </label>
 					<input
 						name='prepTime'
-						placeholder='30 minutes'
+						placeholder='Enter prep time'
 						value={prep_time}
 						onChange={prepTimeOnChange}
 					/>
@@ -103,7 +103,7 @@ const CreateRecipe = (props) => {
 					<label htmlFor='cooktime'>Cook Time: </label>
 					<input
 						name='cookTime'
-						placeholder='30 minutes'
+						placeholder='Enter cook time'
 						value={cook_time}
 						onChange={cookTimeOnChange}
 					/>
@@ -113,7 +113,7 @@ const CreateRecipe = (props) => {
 					<label htmlFor='servingsize'>Serving Size: </label>
 					<input
 						name='servingSize'
-						placeholder='1'
+						placeholder='Enter serving size'
 						value={serving_size}
 						onChange={servingSizeOnChange}
 					/>
@@ -121,9 +121,10 @@ const CreateRecipe = (props) => {
 				</div>
 				<div className='createRecipeFields'>
 					<label htmlFor='ingredients'>Ingredients: </label>
-					<input
+					<textarea
+						rows='10'
 						name='ingredients'
-						placeholder='Peanut Butter, Jelly, Bread'
+						placeholder='Enter ingredients, separated by commas'
 						value={ingredients}
 						onChange={ingredientsOnChange}
 					/>
@@ -131,11 +132,22 @@ const CreateRecipe = (props) => {
 				</div>
 				<div className='createRecipeFields'>
 					<label htmlFor='directions'>Directions: </label>
-					<input
+					<textarea
+						rows='10'
 						name='directions'
-						placeholder='Spread the jelly and peanut butter on the bread.'
+						placeholder='Enter directions, separated by commas'
 						value={directions}
 						onChange={directionsOnChange}
+					/>
+					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
+				</div>
+				<div className='createRecipeFields'>
+					<label htmlFor='imageUrl'>Image URL: </label>
+					<input
+						name='imageUrl'
+						placeholder='Optional - paste image URL here'
+						value={image_url}
+						onChange={imageUrlOnChange}
 					/>
 					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>

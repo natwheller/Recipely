@@ -45,15 +45,30 @@ h3 {
   font-size: 2rem;
   font-family: 'Pacifico', cursive;
   color: rgb(112, 108, 108);
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 h4 {
   font-size: 1.5rem;
 }
 
-input {
+input, textarea {
   width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  color: black;
+  border-radius: 5px;
+  border:rgb(135, 127, 127) 2px solid;
+  padding: 8px;
 }
+
+textarea {
+  height: 100%;
+}
+
 
 a,
 p,
@@ -214,7 +229,7 @@ body {
 }
 
 .createRecipe {
-  max-width: 25em;
+  max-width: 35em;
   width: 100%;
   align-self: center;
 }
@@ -271,8 +286,9 @@ body {
 .recipeCard {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   margin: 0.5rem;
+  align-items: center;
 }
 
 /* recipe card header */
@@ -287,7 +303,11 @@ body {
 }
 
 .recipeHeadContainer h3 {
+  display: flex;
   margin: 0;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .recipeHeadContainer .favIcon {
