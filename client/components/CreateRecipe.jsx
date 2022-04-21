@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-// requiring json data for use in dropdown and checkboxes
-const speciesData = require('../data/species.json');
-const planetsData = require('../data/planets.json');
-
 // Custom hook for handling input boxes
-// saves us from creating onChange handlers for them individually
 const useInput = (init) => {
+	// default state value is set to initial value
 	const [value, setValue] = useState(init);
+	// on change it updates to the target value
 	const onChange = (e) => {
 		setValue(e.target.value);
 	};
@@ -16,37 +13,25 @@ const useInput = (init) => {
 	return [value, onChange];
 };
 
+// passing down props
 const CreateRecipe = (props) => {
 	const [name, nameOnChange] = useInput('');
 	const [prep_time, prepTimeOnChange] = useInput('');
 	const [cook_time, cookTimeOnChange] = useInput('');
 	const [serving_size, servingSizeOnChange] = useInput('');
 	const [image_url, imageUrlOnChange] = useInput('');
-	// add input fields for directions and ingredients
-	const [species, setSpecies] = useState(speciesData[0].name);
-	const [species_id, setSpeciesId] = useState(speciesData[0]._id);
-	const [homeworld, setHomeworld] = useState(planetsData[0].name);
-	const [homeworld_id, setHomeworldId] = useState(planetsData[0]._id);
+	const [ingredients, ingredientsOnChange] = useInput('');
+	const [directions, directionsOnChange] = useInput('');
 	const [nameError, setNameError] = useState(null);
 
-	const handleSpeciesChange = (e) => {
-		const idx = e.target.value;
-		setSpecies(speciesData[idx].name);
-		setSpeciesId(speciesData[idx]._id);
-	};
-
-	const handleHomeworldChange = (e) => {
-		const idx = e.target.value;
-		setHomeworld(planetsData[idx].name);
-		setHomeworldId(planetsData[idx]._id);
-	};
-
 	const saveRecipe = () => {
-		// check if name is empty
+		// check if any are empty
 		if (name === '') setNameError('required');
 		if (prep_time === '') setNameError('required');
 		if (cook_time === '') setNameError('required');
 		if (serving_size === '') setNameError('required');
+		if (ingredients === '') setNameError('required');
+		if (directions === '') setNameError('required');
 
 		const body = {
 			name,
@@ -54,11 +39,8 @@ const CreateRecipe = (props) => {
 			cook_time,
 			serving_size,
 			image_url,
-			species,
-			species_id,
-			homeworld,
-			homeworld_id,
-			//need to add ingredients and directions here
+			ingredients,
+			directions,
 		};
 
 		fetch('/api/recipe', {
@@ -69,9 +51,10 @@ const CreateRecipe = (props) => {
 			body: JSON.stringify(body),
 		})
 			.then((resp) => resp.json())
-			.then((data) => {
-				console.log(data);
-			})
+			.then((data) =>
+				console.log('this is logging in post fetch request' + data)
+			)
+
 			.then(() => {
 				props.history.push('/');
 			})
@@ -82,37 +65,21 @@ const CreateRecipe = (props) => {
 	// useEffect to clear nameError when `name` is changed
 	useEffect(() => {
 		setNameError(null);
-	}, [name, prep_time, cook_time, serving_size]);
-
-	const speciesOptions = speciesData.map((speciesObj, idx) => {
-		return (
-			<option key={idx} value={idx}>
-				{speciesObj.name}
-			</option>
-		);
-	});
-
-	const homeworldOptions = planetsData.map((planetObj, idx) => {
-		return (
-			<option key={idx} value={idx}>
-				{planetObj.name}
-			</option>
-		);
-	});
+	}, [name, prep_time, cook_time, serving_size, ingredients, directions]);
 
 	return (
-		<section className='mainSection createCharContainer'>
+		<section className='mainSection createRecipeContainer'>
 			<header className='pageHeader'>
 				<h2>Recipe Creator</h2>
 				<Link to='/' className='backLink'>
-					<button type='button' className='btnSecondary'>
+					<button type='button' className='btnnav'>
 						Back to all recipes
 					</button>
 				</Link>
 			</header>
-			<article className='card createChar'>
+			<article className='card createRecipe'>
 				<h3>Enter your recipe details</h3>
-				<div className='createCharFields'>
+				<div className='createRecipeFields'>
 					<label htmlFor='name'>Name: </label>
 					<input
 						name='name'
@@ -122,7 +89,7 @@ const CreateRecipe = (props) => {
 					/>
 					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
-				<div className='createCharFields'>
+				<div className='createRecipeFields'>
 					<label htmlFor='preptime'>Prep Time: </label>
 					<input
 						name='prepTime'
@@ -132,9 +99,7 @@ const CreateRecipe = (props) => {
 					/>
 					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
-				{/* add text areas here for ingredients and instructions */}
-
-				<div className='createCharFields'>
+				<div className='createRecipeFields'>
 					<label htmlFor='cooktime'>Cook Time: </label>
 					<input
 						name='cookTime'
@@ -144,7 +109,7 @@ const CreateRecipe = (props) => {
 					/>
 					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
-				<div className='createCharFields'>
+				<div className='createRecipeFields'>
 					<label htmlFor='servingsize'>Serving Size: </label>
 					<input
 						name='servingSize'
@@ -154,27 +119,30 @@ const CreateRecipe = (props) => {
 					/>
 					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
-
-				<div className='createCharFields'>
-					<label htmlFor='homeworld'>Ingredients: </label>
-					<select name='homeworld' onChange={handleHomeworldChange}>
-						{homeworldOptions}
-					</select>
+				<div className='createRecipeFields'>
+					<label htmlFor='ingredients'>Ingredients: </label>
+					<input
+						name='ingredients'
+						placeholder='Peanut Butter, Jelly, Bread'
+						value={ingredients}
+						onChange={ingredientsOnChange}
+					/>
+					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
-				<div className='createCharFields'>
-					<label htmlFor='species'>Directions: </label>
-					<select
-						name='species'
-						id='species-select'
-						onChange={handleSpeciesChange}
-					>
-						{speciesOptions}
-					</select>
+				<div className='createRecipeFields'>
+					<label htmlFor='directions'>Directions: </label>
+					<input
+						name='directions'
+						placeholder='Spread the jelly and peanut butter on the bread.'
+						value={directions}
+						onChange={directionsOnChange}
+					/>
+					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
 
 				{/* add photo upload here */}
 
-				<div className='createCharButtonContainer'>
+				<div className='createRecipeButtonContainer'>
 					<Link to='/' className='backLink'>
 						<button type='button' className='btnSecondary'>
 							Cancel
@@ -182,7 +150,6 @@ const CreateRecipe = (props) => {
 					</Link>
 					<button type='button' className='btnMain' onClick={saveRecipe}>
 						Save
-						{/* make sure this captures all the new fields you add */}
 					</button>
 				</div>
 			</article>

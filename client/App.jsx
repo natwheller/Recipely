@@ -1,5 +1,3 @@
-// we render 2 components here: the Characters and the CreateCharacter
-
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 

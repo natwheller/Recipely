@@ -3,12 +3,26 @@ import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { faGrinBeam, faSmile } from '@fortawesome/free-regular-svg-icons';
 
-const RecipesModal = ({ type, position, id, closeModal }) => {
+// this should be fine since pb&j works
+// passing down props we'll need from the Recipes component
+const RecipesModal = ({
+	type,
+	position,
+	id,
+	closeModal,
+	ingredients,
+	directions,
+}) => {
+	// default value here is a blank object
 	const [details, setDetails] = useState({});
+	// default value here is true
 	const [isFetching, setIsFetching] = useState(true);
 
 	useEffect(() => {
+		// if an id exists, setIsFetching=true and fetch the recipe data from the api
+		// after we get the data, setIsFetching=false
 		if (id) {
+			console.log(id);
 			setIsFetching(true);
 			fetch(`/api/${type}?id=${id}`)
 				.then((resp) => resp.json())
@@ -23,6 +37,7 @@ const RecipesModal = ({ type, position, id, closeModal }) => {
 		}
 	}, [id, type]);
 
+	// this is where we render the message on modal if we're in the middle of fetching
 	if (isFetching) {
 		return (
 			<div className='modal' style={position}>
@@ -32,14 +47,17 @@ const RecipesModal = ({ type, position, id, closeModal }) => {
 	}
 
 	let info;
+	console.log(type);
 	switch (type) {
 		case 'ingredients':
 			const { one, two, three, four, five, six, seven, eight, nine, ten } =
 				details;
+
 			info = (
 				<>
 					<div className='modalHeading'>
 						<h4 className='modalName'>Ingredients</h4>
+						{/* we close modal on click */}
 						<FAIcon icon={faTimes} onClick={closeModal} />
 					</div>
 					<ul className='modalList'>
@@ -77,6 +95,7 @@ const RecipesModal = ({ type, position, id, closeModal }) => {
 						<FAIcon icon={faTimes} onClick={closeModal} />
 					</div>
 					<ol className='modalList'>
+						{/* conditional rendering where if item is null we don't render  */}
 						{one_d ? <li className='modalDetail'>{one_d}</li> : null}
 						{two_d ? <li className='modalDetail'>{two_d}</li> : null}
 						{three_d ? <li className='modalDetail'>{three_d}</li> : null}

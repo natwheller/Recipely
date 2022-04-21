@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"starwars.species"}],"uuid":"95a20af80b5e49de872a3d74747b46c4"}

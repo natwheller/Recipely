@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"starwars.planets"}],"uuid":"c05906de79da40fdb1ca0cbe175e8ed4"}

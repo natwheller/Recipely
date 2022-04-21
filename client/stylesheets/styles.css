@@ -13,14 +13,15 @@
 
 html {
   box-sizing: border-box;
-  font: 62.5% 'Source Sans Pro', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 
 body {
   margin: 0px;
   line-height: 1.3;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
 }
 
 a {
@@ -28,7 +29,12 @@ a {
 }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 5rem;
+  font-family: 'Pacifico', cursive;
+  align-items: center;
+  height: 100px;
+  display: flex;
+  justify-content: center;
 }
 
 h2 {
@@ -36,7 +42,17 @@ h2 {
 }
 
 h3 {
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-family: 'Pacifico', cursive;
+  color: rgb(112, 108, 108);
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+input {
+  width: 100%;
 }
 
 a,
@@ -44,11 +60,16 @@ p,
 li,
 button,
 div {
-  font-size: 1.4rem;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
 }
 
 small {
-  font-size: 1.2rem;
+  font-size: 1rem;
+}
+
+img {
+  margin-top: 20px;
 }
 
 figure {
@@ -73,8 +94,16 @@ button {
 body {
   padding-left: 1rem;
   padding-right: 1rem;
-  background: rgba(22, 22, 22, 0.915);
+  background: rgba(38, 159, 211, 0.915);
   color: #e4e4e4;
+}
+
+
+.recipeDetail {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  color: black;
+  line-height: 1.7;
 }
 
 .mainSection {
@@ -82,21 +111,31 @@ body {
 }
 
 /* page options */
-.charactersPageOptions {
+.recipesPageOptions {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-top: 3rem;
 }
 
-.charactersPageOptions button {
+.recipesPageOptions button {
   width: 100%;
   max-width: 200px;
   font-size: 14px;
   padding: 1rem 1.5rem;
+  border-radius: 10px;
 }
 
 .card {
+  color: rgb(49, 44, 44);
+  background: #e1b86d;
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid rgb(240, 158, 57);
+  box-shadow: 1px 1px 5px rgba(22, 22, 22, 0.915);
+}
+
+.card .createRecipe {
   color: rgb(49, 44, 44);
   background: #e1b86d;
   padding: 2rem;
@@ -118,75 +157,80 @@ body {
   border: 1px solid steelblue;
   padding: 0.5rem 1rem;
   height: 3rem;
+  border-radius: 10px;
+  width: 40%;
 }
 
 .btnSecondary {
   background: #f3f3f3;
+  border: 1px solid rgb(134, 137, 139);
   padding: 0.5rem 1rem;
   height: 3rem;
+  border-radius: 10px;
+  width: 150%;
+}
+
+.btnnav {
+  background: #f3f3f3;
+  border: 1px solid rgb(134, 137, 139);
+  padding: 0.5rem 1rem;
+  height: 3rem;
+  border-radius: 10px;
+  width: 100%;
 }
 
 .btnLg {
   height: 5rem;
 }
 
-/* character photo */
-.charPhoto {
+/* recipe photo */
+.recipePhoto {
   max-width: 100%;
   display: flex;
   flex-direction: row;
 }
 
-.charPhoto img {
+.recipePhoto img {
   width: 128px;
   height: 128px;
 }
 
-/* custom character styles */
-.customCharContainer {
+/* custom recipe styles */
+.customRecipeContainer {
   display: flex;
   flex-direction: column;
 }
 
-.customizeChar {
+.customizeRecipe {
   max-width: 30rem;
   width: 100%;
   align-self: center;
 }
 
-/* create character styles */
-.createCharContainer {
+/* create recipe styles */
+.createRecipeContainer {
   display: flex;
   flex-direction: column;
 }
 
-.createChar {
+.createRecipe {
   max-width: 25em;
   width: 100%;
   align-self: center;
 }
 
-.createCharFields {
+.createRecipeFields {
   width: 100%;
   display: flex;
   margin-bottom: 0.2rem;
 }
 
-.createCharFields label {
+.createRecipeFields label {
   min-width: 8rem;
   width: 9rem;
 }
 
-.filmCheckboxContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.checkboxLabel {
-  font-size: 1.2rem;
-}
-
-.createCharButtonContainer {
+.createRecipeButtonContainer {
   margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
@@ -218,71 +262,71 @@ body {
 }
 
 /* cards container */
-.charContainer {
+.recipeContainer {
   padding: 1rem 3rem;
   display: grid;
 }
 
-/* character card container */
-.charCard {
+/* recipe card container */
+.recipeCard {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   margin: 0.5rem;
 }
 
-/* character card header */
-.charHeadContainer {
+/* recipe card header */
+.recipeHeadContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.charHeadContainer div {
+.recipeHeadContainer div {
   width: 100%;
 }
 
-.charHeadContainer h3 {
+.recipeHeadContainer h3 {
   margin: 0;
 }
 
-.charHeadContainer .favIcon {
+.recipeHeadContainer .favIcon {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 }
 
-/* character card photo */
-.charCard .charPhoto {
+/* recipe card photo */
+.recipeCard .recipePhoto {
   justify-content: center;
 }
 
-/* character additional details - films */
-.charAddlDetail {
+/* recipe additional details - films */
+.recipeAddlDetail {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.charFilmsList {
+.recipeFilmsList {
   margin-top: 0;
 }
 
-.charFilm {
+.recipeFilm {
   margin-left: 0.5rem;
 }
 
-/* character buttons */
-.charBtnOptions {
+/* recipe buttons */
+.recipeBtnOptions {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 
-.charBtnOptions .space {
+.recipeBtnOptions .space {
   margin-bottom: 1rem;
 }
 
-.charBtnOptions button {
+.recipeBtnOptions button {
   width: 100%;
 }
 
@@ -301,10 +345,15 @@ body {
 .modalName {
   margin-top: 5px;
   margin-bottom: 5px;
+  font-size: 1.5rem;
 }
 
 .modalList {
   margin: 0;
+}
+
+.modalDetail {
+  font-size: 1rem;
 }
 
 .modalHeading {
@@ -322,32 +371,32 @@ body {
 */
 /* Mobile */
 @media screen and (max-width: 600px) {
-  .charContainer {
+  .recipeContainer {
     grid-template-columns: repeat(1, 1fr);
   }
 
-  .charCard .charPhoto {
+  .recipeCard .recipePhoto {
     justify-content: flex-start;
   }
 }
 
 /* Tablet */
 @media screen and (min-width: 601px) and (max-width: 900px) {
-  .charContainer {
+  .recipeContainer {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 /* Normal */
 @media screen and (min-width: 901px) and (max-width: 1200px) {
-  .charContainer {
+  .recipeContainer {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 /* Lg Screen */
 @media screen and (min-width: 1201px) {
-  .charContainer {
+  .recipeContainer {
     grid-template-columns: repeat(5, 1fr);
   }
 }

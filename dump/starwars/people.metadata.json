@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"starwars.people"}],"uuid":"1189eda4b9334dacbfbb6e7e2db8f555"}

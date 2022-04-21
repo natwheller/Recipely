@@ -22,6 +22,7 @@ class Recipes extends Component {
 		this.closeModal = this.closeModal.bind(this);
 	}
 
+	// when this function is invoked, data is sent in json format and recipes are stored in state
 	componentDidMount() {
 		fetch('/api/')
 			.then((res) => res.json())
@@ -35,8 +36,43 @@ class Recipes extends Component {
 			.catch((err) =>
 				console.log('Recipes.componentDidMount: get recipes: ERROR: ', err)
 			);
+
+		// fetch('/api/ingredients/' + this.state.ingredients.recipe_id)
+		// 	.then((res) => res.json())
+		// 	.then((ingredients) => {
+		// 		if (!Array.isArray(ingredients)) ingredients = [];
+		// 		return this.setState({
+		// 			ingredients,
+		// 			fetchedIngredients: true,
+		// 		});
+		// 	})
+		// 	.catch((err) =>
+		// 		console.log(
+		// 			'Ingredients.componentDidMount: get ingredients: ERROR: ',
+		// 			err
+		// 		)
+		// 	);
+
+		// 	fetch('/api/directions/')
+		// 		.then((res) => res.json())
+		// 		.then((directions) => {
+		// 			if (!Array.isArray(directions)) directions = [];
+		// 			return this.setState({
+		// 				directions,
+		// 				fetchedDirections: true,
+		// 			});
+		// 		})
+		// 		.catch((err) =>
+		// 			console.log(
+		// 				'Directions.componentDidMount: get directions: ERROR: ',
+		// 				err
+		// 			)
+		// 		);
 	}
 
+	// when we open the details, we change open to 'true' in state
+	// these props get updated on RecipeCard onclick
+	// the div modal only shows up as an html element if the icon is clicked!
 	openModal(type, position, id) {
 		this.setState({
 			modalState: {
@@ -47,8 +83,25 @@ class Recipes extends Component {
 				id,
 			},
 		});
+		// fetch('/api/ingredients/' + id)
+		// 	.then((res) => res.json())
+		// 	.then((ingredients) => {
+		// 		console.log('this is the fetch for ingredients' + ingredients.one);
+		// 		if (!Array.isArray(ingredients)) ingredients = [];
+		// 		return this.setState({
+		// 			ingredients,
+		// 			fetchedIngredients: true,
+		// 		});
+		// 	})
+		// 	.catch((err) =>
+		// 		console.log(
+		// 			'Ingredients.componentDidMount: get ingredients: ERROR: ',
+		// 			err
+		// 		)
+		// 	);
 	}
 
+	// when we close the details, we change open to 'false' in state
 	closeModal() {
 		this.setState({
 			modalState: {
@@ -58,35 +111,47 @@ class Recipes extends Component {
 		});
 	}
 
+	// if fetched recipes is false, we render 'loading' message
 	render() {
 		if (!this.state.fetchedRecipes)
 			return (
 				<div>
-					<h1>Loading info, please wait...</h1>
+					<h4>Loading info, please wait...</h4>
 				</div>
 			);
 
-		const { recipes } = this.state;
+		// this.state.recipes
+		const { recipes, ingredients } = this.state;
 
 		if (!recipes) return null;
 
 		if (!recipes.length) return <div>Sorry, no recipes found</div>;
 
+		// pass props to recipe card (key, info, and ability to invoke openModal)
 		const recipeElems = recipes.map((recipe, i) => {
-			return <RecipeCard key={i} info={recipe} openModal={this.openModal} />;
+			return (
+				<RecipeCard
+					key={i}
+					id={recipe.recipe_id}
+					info={recipe}
+					openModal={this.openModal}
+				/>
+			);
 		});
 
 		return (
+			// renders the main section for recipes, create button, each recipe card & modals
 			<section className='mainSection'>
 				<header className='pageHeader'>
 					<h2>Recipes</h2>
 					<Link to={'/create'}>
-						<button type='button' className='btnSecondary'>
+						<button type='button' className='btnnav'>
 							Create Recipe
 						</button>
 					</Link>
 				</header>
-				<div className='charContainer'>{recipeElems}</div>
+				<div className='recipeContainer'>{recipeElems}</div>
+				{/* conditional rendering, if modal is open and has the below props*/}
 				{this.state.modalState.open && (
 					<DetailsModal
 						type={this.state.modalState.type}
