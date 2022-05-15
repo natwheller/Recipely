@@ -3,13 +3,10 @@ import { Link, withRouter } from 'react-router-dom';
 
 // Custom hook for handling input boxes
 const useInput = (init) => {
-	// default state value is set to initial value
 	const [value, setValue] = useState(init);
-	// on change it updates to the target value
 	const onChange = (e) => {
 		setValue(e.target.value);
 	};
-	// return the value with the onChange function instead of setValue function
 	return [value, onChange];
 };
 

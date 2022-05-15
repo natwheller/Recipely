@@ -23,13 +23,17 @@ const SearchRecipe = (props) => {
 	};
 
 	const loadDirections = async (id) => {
+		// might need to do a forEach up here and then store all results in array or object
 		const response = await fetch(
 			`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
 			// https://www.themealdb.com/api/json/v1/1/lookup.php?i=53016
 		);
 		const data = await response.json();
-		instructions = data.meals[0].strYoutube;
-		console.log(`we are logging the directions` + instructions);
+		instructions = await data.meals[0].strYoutube;
+		// const vidsArr = [];
+		// vidsArr.push(instructions);
+		// console.log('storing the youtube url in instructions' + instructions);
+		// console.log(vidsArr);
 	};
 
 	const routeChange = () => {
@@ -37,6 +41,7 @@ const SearchRecipe = (props) => {
 	};
 
 	const recipeItems = recipes.map(function (r) {
+		// console.log(r.idMeal);
 		loadDirections(r.idMeal);
 		return (
 			<>
