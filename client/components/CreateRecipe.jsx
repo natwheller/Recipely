@@ -1,34 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-// Custom hook for handling input boxes
-const useInput = (init) => {
-	const [value, setValue] = useState(init);
-	const onChange = (e) => {
-		setValue(e.target.value);
-	};
-	return [value, onChange];
-};
-
-// passing down props
 const CreateRecipe = (props) => {
-	const [name, nameOnChange] = useInput('');
-	const [prep_time, prepTimeOnChange] = useInput('');
-	const [cook_time, cookTimeOnChange] = useInput('');
-	const [serving_size, servingSizeOnChange] = useInput('');
-	const [image_url, imageUrlOnChange] = useInput('');
-	const [ingredients, ingredientsOnChange] = useInput('');
-	const [directions, directionsOnChange] = useInput('');
-	const [nameError, setNameError] = useState(null);
+	// useState hooks to update values based on user input
+	const [name, setName] = useState('');
+	const [prep_time, setPrepTime] = useState('');
+	const [cook_time, setCookTime] = useState('');
+	const [serving_size, setServingSize] = useState('');
+	const [image_url, setImageUrl] = useState('');
+	const [ingredients, setIngredients] = useState('');
+	const [directions, setDirections] = useState('');
 
 	const saveRecipe = () => {
-		// check if any are empty
-		if (name === '') setNameError('required');
-		if (prep_time === '') setNameError('required');
-		if (cook_time === '') setNameError('required');
-		if (serving_size === '') setNameError('required');
-		if (ingredients === '') setNameError('required');
-		if (directions === '') setNameError('required');
+		// checks if any fields are empty
+		if (name === '') alert('name is required');
+		if (prep_time === '') alert('prep time is required');
+		if (cook_time === '') alert('cook time is required');
+		if (serving_size === '') alert('serving size is required');
+		if (ingredients === '') alert('ingredients are required');
+		if (directions === '') alert('directions are required');
 
 		const body = {
 			name,
@@ -40,30 +30,36 @@ const CreateRecipe = (props) => {
 			directions,
 		};
 
-		fetch('/api/recipe', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'Application/JSON',
-			},
-			body: JSON.stringify(body),
-		})
-			.then((resp) => resp.json())
-			.then((data) =>
-				console.log('this is logging in post fetch request' + data)
-			)
+		// checks for empty required fields before submitting
+		let hasEmptyInput = false;
+		for (const key in body) {
+			if (body[key] === '' && key !== 'image_url') hasEmptyInput = true;
+		}
 
-			.then(() => {
-				props.history.push('/');
+		// post request to send recipe to database
+		if (!hasEmptyInput) {
+			fetch('/api/recipe', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'Application/JSON',
+				},
+				body: JSON.stringify(body),
 			})
-			.catch((err) =>
-				console.log('CreateRecipe fetch /api/recipe: ERROR: ', err)
-			);
-	};
-	// useEffect to clear nameError when `name` is changed
-	useEffect(() => {
-		setNameError(null);
-	}, [name, prep_time, cook_time, serving_size, ingredients, directions]);
+				.then((resp) => resp.json())
+				.then((data) =>
+					console.log('this is logging in post fetch request' + data)
+				)
 
+				.then(() => {
+					props.history.push('/');
+				})
+				.catch((err) =>
+					console.log('CreateRecipe fetch /api/recipe: ERROR: ', err)
+				);
+		}
+	};
+
+	// this is where we render the create recipe form
 	return (
 		<section className='mainSection createRecipeContainer'>
 			<header className='pageHeader'>
@@ -82,9 +78,8 @@ const CreateRecipe = (props) => {
 						name='name'
 						placeholder='Enter name of your recipe'
 						value={name}
-						onChange={nameOnChange}
+						onChange={(e) => setName(e.target.value)}
 					/>
-					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
 				<div className='createRecipeFields'>
 					<label htmlFor='preptime'>Prep Time: </label>
@@ -92,9 +87,8 @@ const CreateRecipe = (props) => {
 						name='prepTime'
 						placeholder='Enter prep time'
 						value={prep_time}
-						onChange={prepTimeOnChange}
+						onChange={(e) => setPrepTime(e.target.value)}
 					/>
-					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
 				<div className='createRecipeFields'>
 					<label htmlFor='cooktime'>Cook Time: </label>
@@ -102,9 +96,8 @@ const CreateRecipe = (props) => {
 						name='cookTime'
 						placeholder='Enter cook time'
 						value={cook_time}
-						onChange={cookTimeOnChange}
+						onChange={(e) => setCookTime(e.target.value)}
 					/>
-					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
 				<div className='createRecipeFields'>
 					<label htmlFor='servingsize'>Serving Size: </label>
@@ -112,9 +105,8 @@ const CreateRecipe = (props) => {
 						name='servingSize'
 						placeholder='Enter serving size'
 						value={serving_size}
-						onChange={servingSizeOnChange}
+						onChange={(e) => setServingSize(e.target.value)}
 					/>
-					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
 				<div className='createRecipeFields'>
 					<label htmlFor='ingredients'>Ingredients: </label>
@@ -123,9 +115,8 @@ const CreateRecipe = (props) => {
 						name='ingredients'
 						placeholder='Enter ingredients, separated by commas'
 						value={ingredients}
-						onChange={ingredientsOnChange}
+						onChange={(e) => setIngredients(e.target.value)}
 					/>
-					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
 				<div className='createRecipeFields'>
 					<label htmlFor='directions'>Directions: </label>
@@ -134,9 +125,8 @@ const CreateRecipe = (props) => {
 						name='directions'
 						placeholder='Enter directions, separated by commas'
 						value={directions}
-						onChange={directionsOnChange}
+						onChange={(e) => setDirections(e.target.value)}
 					/>
-					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
 				<div className='createRecipeFields'>
 					<label htmlFor='imageUrl'>Image URL: </label>
@@ -144,12 +134,9 @@ const CreateRecipe = (props) => {
 						name='imageUrl'
 						placeholder='Optional - paste image URL here'
 						value={image_url}
-						onChange={imageUrlOnChange}
+						onChange={(e) => setImageUrl(e.target.value)}
 					/>
-					{nameError ? <span className='errorMsg'>{nameError}</span> : null}
 				</div>
-
-				{/* add photo upload here */}
 
 				<div className='createRecipeButtonContainer'>
 					<Link to='/' className='backLink'>

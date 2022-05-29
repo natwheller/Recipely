@@ -8,17 +8,7 @@ const recipeController = {};
 recipeController.getRecipes = async (req, res, next) => {
 	try {
 		const sql = `SELECT * FROM recipes`;
-
-		// `SELECT to_json(res) FROM
-		// (
-		// SELECT r.*, to_json(i) "ingredients"
-		// FROM recipes r
-		// INNER JOIN ingredients i
-		// ON r.recipe_id = i.recipe_id
-		// ) res;`;
-
 		const dbQuery = await db.query(sql);
-		// console.log(dbQuery.rows);
 		res.locals.getRecipes = await dbQuery.rows;
 		return next();
 	} catch (err) {
@@ -40,7 +30,6 @@ recipeController.getIngredients = async (req, res, next) => {
 		const dbQuery = await db.query(queryStr);
 		console.log(dbQuery.rows + `console log dbquery`);
 		res.locals.getIngredients = dbQuery.rows[0];
-		// console.log(res.locals.getIngredients);
 		return next();
 	} catch (err) {
 		return next({
@@ -59,9 +48,7 @@ recipeController.getDirections = async (req, res, next) => {
 			WHERE recipe_id = ${req.query.id}`;
 
 		const dbQuery = await db.query(queryStr);
-		// console.log(dbQuery.rows[0]);
 		res.locals.getDirections = dbQuery.rows[0];
-		// console.log(res.locals.getDirections);
 		return next();
 	} catch (err) {
 		return next({
@@ -78,7 +65,6 @@ recipeController.addRecipe = async (req, res, next) => {
 	const text =
 		'INSERT INTO recipes (name, prep_time, cook_time, serving_size, image_URL) VALUES($1, $2, $3, $4, $5)';
 
-	// console.log(req.body);
 	const { name, prep_time, cook_time, serving_size, image_url } = req.body;
 
 	const values = [name, prep_time, cook_time, serving_size, image_url];
@@ -143,8 +129,6 @@ recipeController.addIngredients = async (req, res, next) => {
 	};
 	try {
 		await db.query(text, values);
-		// we can see this went into the ingredients array in postman
-		// post into ingredients is working!!!
 		res.locals.addIngredients = newIngredients;
 		console.log(res.locals.addIngredients);
 		return next();
@@ -162,8 +146,6 @@ recipeController.addIngredients = async (req, res, next) => {
 recipeController.addDirections = async (req, res, next) => {
 	const text =
 		'INSERT INTO directions (one_d, two_d, three_d, four_d, five_d, six_d, seven_d, eight_d, nine_d, ten_d) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)';
-
-	// console.log(req.body);
 
 	const reqStr = req.body.directions;
 	const directions = reqStr.split(', ');
@@ -196,8 +178,6 @@ recipeController.addDirections = async (req, res, next) => {
 	};
 	try {
 		await db.query(text, values);
-		// we can see this went into the directions array in postman
-		// post into directions is working!!!
 		res.locals.addDirections = newDirections;
 		console.log(res.locals.addDirections);
 		return next();

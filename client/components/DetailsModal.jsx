@@ -3,7 +3,6 @@ import { FontAwesomeIcon as FAIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { faGrinBeam, faSmile } from '@fortawesome/free-regular-svg-icons';
 
-// this should be fine since pb&j works
 // passing down props we'll need from the Recipes component
 const RecipesModal = ({
 	type,
@@ -57,7 +56,6 @@ const RecipesModal = ({
 				<>
 					<div className='modalHeading'>
 						<h4 className='modalName'>Ingredients</h4>
-						{/* we close modal on click */}
 						<FAIcon icon={faTimes} onClick={closeModal} />
 					</div>
 					<ul className='modalList'>

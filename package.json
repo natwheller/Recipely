@@ -36,6 +36,8 @@
 		"eslint-plugin-react": "^7.21.5",
 		"file-loader": "^6.2.0",
 		"html-webpack-plugin": "^5.5.0",
+		"image-webpack-loader": "^8.1.0",
+		"img-loader": "^4.0.0",
 		"nodemon": "^2.0.15",
 		"style-loader": "^3.3.1",
 		"webpack": "^5.64.1",

@@ -36,40 +36,9 @@ class Recipes extends Component {
 			.catch((err) =>
 				console.log('Recipes.componentDidMount: get recipes: ERROR: ', err)
 			);
-
-		// fetch('/api/ingredients/' + this.state.ingredients.recipe_id)
-		// 	.then((res) => res.json())
-		// 	.then((ingredients) => {
-		// 		if (!Array.isArray(ingredients)) ingredients = [];
-		// 		return this.setState({
-		// 			ingredients,
-		// 			fetchedIngredients: true,
-		// 		});
-		// 	})
-		// 	.catch((err) =>
-		// 		console.log(
-		// 			'Ingredients.componentDidMount: get ingredients: ERROR: ',
-		// 			err
-		// 		)
-		// 	);
-
-		// 	fetch('/api/directions/')
-		// 		.then((res) => res.json())
-		// 		.then((directions) => {
-		// 			if (!Array.isArray(directions)) directions = [];
-		// 			return this.setState({
-		// 				directions,
-		// 				fetchedDirections: true,
-		// 			});
-		// 		})
-		// 		.catch((err) =>
-		// 			console.log(
-		// 				'Directions.componentDidMount: get directions: ERROR: ',
-		// 				err
-		// 			)
-		// 		);
 	}
 
+	// these are just event handlers!
 	// when we open the details, we change open to 'true' in state
 	// these props get updated on RecipeCard onclick
 	// the div modal only shows up as an html element if the icon is clicked!
@@ -83,24 +52,9 @@ class Recipes extends Component {
 				id,
 			},
 		});
-		// fetch('/api/ingredients/' + id)
-		// 	.then((res) => res.json())
-		// 	.then((ingredients) => {
-		// 		console.log('this is the fetch for ingredients' + ingredients.one);
-		// 		if (!Array.isArray(ingredients)) ingredients = [];
-		// 		return this.setState({
-		// 			ingredients,
-		// 			fetchedIngredients: true,
-		// 		});
-		// 	})
-		// 	.catch((err) =>
-		// 		console.log(
-		// 			'Ingredients.componentDidMount: get ingredients: ERROR: ',
-		// 			err
-		// 		)
-		// 	);
 	}
 
+	// these are just event handlers!
 	// when we close the details, we change open to 'false' in state
 	closeModal() {
 		this.setState({
@@ -143,7 +97,6 @@ class Recipes extends Component {
 			// renders the main section for recipes, create button, each recipe card & modals
 			<section className='mainSection'>
 				<header className='pageHeader'>
-					<h2>Recipes</h2>
 					<Link to={'/create'}>
 						<button type='button' className='btnnav'>
 							Create Recipe
@@ -156,7 +109,6 @@ class Recipes extends Component {
 					</Link>
 				</header>
 				<div className='recipeContainer'>{recipeElems}</div>
-				{/* conditional rendering, if modal is open and has the below props*/}
 				{this.state.modalState.open && (
 					<DetailsModal
 						type={this.state.modalState.type}
